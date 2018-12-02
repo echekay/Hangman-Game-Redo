@@ -3,8 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>Hangman Game</title>
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-
+  <header>Space Film Hangman</header>
+  <div class="container">
+    <h3>Instructions</h3>
+    <p>Press any key to start the game.</p>
+    <p>Wins: <span id="wins">0</span></p>
+    <p>Current Movie</p>
+    <!-- Movie title separated as single characters to be guessed. -->
+    <p><span id="movieTitle"></span></p>
+    <p>Number of Guesses Left: <span id="guessesRemaining">10</span></p>
+    <p>Letters Already Guessed:</p>
+    <p>[ <span id="incorrectGuesses"></span> ]</p>
+  </div>
+  <div></div>
+<script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>
 </html>
