@@ -21,7 +21,10 @@ var game = {
   numGuesses: 10,
   userGuess: "",
   lettersGuessed: [],
+  randomlyGeneratedMovie: "",
+  generatedMovieSplit: [],
   generatedMovie: "",
+  titleLetters: document.getElementById("movieTitle"),
   guessedArray: document.getElementById("incorrectGuesses"),
   wins: document.getElementById("wins"),
   guessesRemaining: document.getElementById("guessesRemaining"),
@@ -42,11 +45,23 @@ var game = {
 // Press a key to start the game.
 // ==============================
 document.onkeyup = function(event) {
-  console.log(game.movies);
-
+  // console.log(game.movies);
+  randomMovie();
+  movieSplit(generatedMovie);
+  testFunction();
 }
 // game randomly chooses one of the movies for the player to guess
+function randomMovie() {
+  generatedMovie = game.movies[Math.floor(Math.random()*game.movies.length)];
+}
+
 // when movie is chosen, display to DOM in form of dashes, in which each character of movie title will be separated and represented individually
+function movieSplit(movie) {
+  generatedMovieSplit = movie[0].split("");
+  console.log(generatedMovieSplit);
+  // for (i = 0; i < generatedMovieSplit.length; i++) {
+  // }
+}
 // if player chooses a correct letter, display correct letter
 // if player chooses incorrect letter, display letter in letters guessed array in the DOM and also decrement the guesses remaining DOM element
 // if player guesses complete title with positive amount of guesses remaining, increment wins column, reset game, have movie trailer play off of youtube
