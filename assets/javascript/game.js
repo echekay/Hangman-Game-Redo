@@ -48,20 +48,45 @@ document.onkeyup = function(event) {
   // console.log(game.movies);
   randomMovie();
   movieSplit(generatedMovie);
-  testFunction();
+  generateDashesDOM();
+  // testFunction();
 }
+//===============================
 // game randomly chooses one of the movies for the player to guess
 function randomMovie() {
   generatedMovie = game.movies[Math.floor(Math.random()*game.movies.length)];
 }
-
-// when movie is chosen, display to DOM in form of dashes, in which each character of movie title will be separated and represented individually
+//===============================
+//When movie gets chosen, split characters into indices assigned to "generatedMovieSplit".
 function movieSplit(movie) {
   generatedMovieSplit = movie[0].split("");
   console.log(generatedMovieSplit);
-  // for (i = 0; i < generatedMovieSplit.length; i++) {
-  // }
 }
+//==============================
+// when movie is chosen, display to DOM in form of dashes, in which each character of movie title will be separated and represented individually. Use ".innerHTML".
+function generateDashesDOM() {
+  var grabSpan = game.titleLetters;
+  // for (i = 0; i < generatedMovieSplit.length; i++) {
+  //   // Target span element and insert dashes using innerhtml and createelement for new spans
+  //   var createSpan = document.createElement("span");
+  //   // createSpan.setAttribute("id",);
+  //   createSpan.innerHTML = generatedMovieSplit[i];
+  //   grabSpan.appendChild(createSpan);
+  //   createSpan.setAttribute("id", ;
+  //   //Below line of code was to be somewhat used to get index place in array and use as an id for the span.
+  //   // console.log(generatedMovieSplit.indexOf(generatedMovieSplit[i]) + "-" + generatedMovieSplit[i]);
+  // }
+  generatedMovieSplit.forEach(function (value, i) {
+    // console.log('%d: %s', i, value);
+    var createSpan = document.createElement("span");
+    createSpan.setAttribute("id", i);
+    createSpan.innerHTML = " - ";
+    grabSpan.appendChild(createSpan);
+  })
+
+  console.log(grabSpan);
+}
+
 // if player chooses a correct letter, display correct letter
 // if player chooses incorrect letter, display letter in letters guessed array in the DOM and also decrement the guesses remaining DOM element
 // if player guesses complete title with positive amount of guesses remaining, increment wins column, reset game, have movie trailer play off of youtube
@@ -70,3 +95,5 @@ function movieSplit(movie) {
 // <iframe width="560" height="315" src=" + movies[1][1] + " frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 // if player cannot guess movie with all the guesses available, display message they lost and start new game
+
+//I need to target the one specific span in the DOM. I then need to loop throught the movie title array and create new spans that correspond with each index from the for-loop. Each new span will insert a placeholder "-" to represent the unguessed letter.
