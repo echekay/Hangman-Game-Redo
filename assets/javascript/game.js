@@ -45,11 +45,13 @@ var game = {
 // Press a key to start the game.
 // ==============================
 document.onkeyup = function(event) {
-  // console.log(game.movies);
-  randomMovie();
-  movieSplit(generatedMovie);
-  generateDashesDOM();
-  // testFunction();
+  if(event.keycode == 32 || event.key === " ") {
+    randomMovie();
+    movieSplit(generatedMovie);
+    generateDashesDOM();
+    letterMatch();
+    // testFunction();
+  }
 }
 //===============================
 // game randomly chooses one of the movies for the player to guess
@@ -66,16 +68,6 @@ function movieSplit(movie) {
 // when movie is chosen, display to DOM in form of dashes, in which each character of movie title will be separated and represented individually. Use ".innerHTML".
 function generateDashesDOM() {
   var grabSpan = game.titleLetters;
-  // for (i = 0; i < generatedMovieSplit.length; i++) {
-  //   // Target span element and insert dashes using innerhtml and createelement for new spans
-  //   var createSpan = document.createElement("span");
-  //   // createSpan.setAttribute("id",);
-  //   createSpan.innerHTML = generatedMovieSplit[i];
-  //   grabSpan.appendChild(createSpan);
-  //   createSpan.setAttribute("id", ;
-  //   //Below line of code was to be somewhat used to get index place in array and use as an id for the span.
-  //   // console.log(generatedMovieSplit.indexOf(generatedMovieSplit[i]) + "-" + generatedMovieSplit[i]);
-  // }
   generatedMovieSplit.forEach(function (value, i) {
     // console.log('%d: %s', i, value);
     var createSpan = document.createElement("span");
@@ -83,12 +75,30 @@ function generateDashesDOM() {
     createSpan.innerHTML = " - ";
     grabSpan.appendChild(createSpan);
   })
-
   console.log(grabSpan);
 }
 
 // if player chooses a correct letter, display correct letter
 // if player chooses incorrect letter, display letter in letters guessed array in the DOM and also decrement the guesses remaining DOM element
+function letterMatch() {
+  document.onkeyup = function(event) {
+    userGuess = event.key;
+    console.log(userGuess);
+    generatedMovieSplit.forEach(function (value, i) {
+      if (userGuess === generatedMovieSplit[i]) {
+        var changeDash = document.getElementById(i);
+        changeDash.innerHTML = generatedMovieSplit[i];
+        console.log(changeDash);
+      } else if (userGuess !== generatedMovieSplit[i]){
+        numGuesses--;
+        guessesRemaining.innerHTML = numGuesses;
+      } else {
+
+      }
+    })
+  }
+}
+
 // if player guesses complete title with positive amount of guesses remaining, increment wins column, reset game, have movie trailer play off of youtube
 
 // example below
